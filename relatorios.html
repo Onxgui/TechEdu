@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechEdu — Consulta de Frequência</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- TOPO -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand app-brand" href="chamada.html">
+          <div class="brand-logo"><i></i><i></i><i></i><i></i></div>
+          <div>
+            <strong>TechEdu</strong>
+            <small>🎓 Curso de Informática</small>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a class="nav-link" href="chamada.html">
+            ✓ <span>Chamada do<br>Dia</span>
+          </a>
+
+          <a class="nav-link" href="alunos.html">
+            ♙ <span>Cadastro de<br>Alunos</span>
+          </a>
+
+          <a class="nav-link active" href="relatorios.html">
+            ⌕ <span>Consulta &<br>Relatórios</span>
+          </a>
+
+          <a class="nav-link" href="edicao.html">
+            ✎ <span>Edição de<br>Dados</span>
+          </a>
+        </nav>
+
+        <div class="user-area">
+          <div class="avatar">AP</div>
+          <div>
+            <b>Área dos Professores</b>
+            <small>Instrutor de Informática</small>
+          </div>
+          <button class="logout" id="logout">↪ Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO -->
+    <main class="container">
+
+      <section class="heading">
+        <div class="eyebrow">⌕ &nbsp; MÓDULO DE ANÁLISE E AUDITORIA</div>
+        <h1>Consulta de Frequência</h1>
+        <p>Filtre por aluno, data, tema das aulas de Informática e exporte relatórios consolidados.</p>
+      </section>
+
+      <!-- EXPORTAÇÃO -->
+      <div class="export-row report-export no-print">
+  <button class="csv-btn" id="exportCsv">⇩ &nbsp; Exportar CSV</button>
+  <button class="print-btn" onclick="window.print()">▣ &nbsp; Imprimir</button>
+  <button class="delete-all-btn" id="deleteAllRecords">▣ &nbsp; Excluir todos os registros</button>
+</div>
+
+      <!-- RESUMO -->
+      <section class="report-stats">
+        <div class="report-stat">
+          <small>Total Filtrado</small>
+          <strong id="rTotal">0</strong>
+          <small>registros encontrados</small>
+        </div>
+
+        <div class="report-stat green">
+          <small>Presenças</small>
+          <strong id="rPresent">0</strong>
+          <small>alunos presentes</small>
+        </div>
+
+        <div class="report-stat red">
+          <small>Ausências</small>
+          <strong id="rAbsent">0</strong>
+          <small>faltas registradas</small>
+        </div>
+
+        <div class="report-stat blue">
+          <small>Taxa de Presença</small>
+          <strong id="rRate">0%</strong>
+
+          <div class="progress">
+            <span id="rBar"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- FILTROS -->
+      <section class="card filters-report no-print">
+        <h3 class="report-filter-title">⚱ FILTROS DE PESQUISA</h3>
+
+        <div class="filter-grid">
+          <input
+            class="form-control"
+            id="filterName"
+            placeholder="⌕  Nome do aluno...">
+
+          <input
+            class="form-control"
+            id="filterDate"
+            type="date"
+            aria-label="Data da Aula">
+
+          <select class="form-control" id="filterTheme"></select>
+
+          <select class="form-control" id="filterDay">
+            <option value="">Todos os dias da semana</option>
+            <option>Segunda-feira</option>
+            <option>Terça-feira</option>
+            <option>Quarta-feira</option>
+            <option>Quinta-feira</option>
+            <option>Sexta-feira</option>
+          </select>
+        </div>
+
+        <div class="status-filter">
+          Filtrar por Status:
+
+          <button class="active" data-status="">
+            Todos
+          </button>
+
+          <button data-status="present">
+            🟢 Apenas Presentes
+          </button>
+
+          <button data-status="absent">
+            🔴 Apenas Ausentes
+          </button>
+        </div>
+      </section>
+
+      <!-- RESULTADOS -->
+      <section class="card report-table-card">
+        <table class="data-table report-table">
+          <thead>
+            <tr>
+              <th>NOME DO ALUNO</th>
+              <th>DATA DA AULA</th>
+              <th>TEMA DA AULA</th>
+              <th>STATUS DE PRESENÇA</th>
+              <th>AÇÕES</th>
+            </tr>
+          </thead>
+
+          <tbody id="reportTable"></tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="system.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechEdu — Cadastro de Alunos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- TOPO -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand app-brand" href="chamada.html">
+          <div class="brand-logo"><i></i><i></i><i></i><i></i></div>
+          <div>
+            <strong>TechEdu</strong>
+            <small>🎓 Curso de Informática</small>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a class="nav-link" href="chamada.html">
+            ✓ <span>Chamada do<br>Dia</span>
+          </a>
+
+          <a class="nav-link active" href="alunos.html">
+            ♙ <span>Cadastro de<br>Alunos</span>
+          </a>
+
+          <a class="nav-link" href="relatorios.html">
+            ⌕ <span>Consulta &<br>Relatórios</span>
+          </a>
+
+          <a class="nav-link" href="edicao.html">
+            ✎ <span>Edição de<br>Dados</span>
+          </a>
+        </nav>
+
+        <div class="user-area">
+          <div class="avatar">AP</div>
+
+          <div>
+            <b>Área dos Professores</b>
+            <small>Instrutor de Informática</small>
+          </div>
+
+          <button class="logout" id="logout">↪ Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO -->
+    <main class="container">
+
+      <section class="heading">
+        <div class="eyebrow">♙ &nbsp; MÓDULO DE GESTÃO DE TURMAS</div>
+        <h1>Cadastro de Alunos</h1>
+        <p>Cadastre novos alunos e gerencie os estudantes das turmas de Informática.</p>
+      </section>
+
+      <!-- FORMULÁRIO DE CADASTRO -->
+      <section class="card form-card">
+        <div class="section-top student-form-header">
+          <h2>🔵 Formulário de Novo Aluno</h2>
+
+          <div class="student-form-header-actions">
+            <button type="button" class="secondary-btn" id="openClassManager">
+              + Gerenciar séries e turmas
+            </button>
+
+            <span class="required-fields">* Campos obrigatórios</span>
+          </div>
+        </div>
+
+        <form id="studentForm">
+          <div class="form-grid">
+
+            <div>
+              <label class="form-label">NOME COMPLETO DO ALUNO *</label>
+              <input
+                class="form-control"
+                id="studentName"
+                type="text"
+                required
+                placeholder="Ex: Mariana Silva Castro">
+            </div>
+
+            <div>
+              <label class="form-label">SÉRIE *</label>
+              <select class="form-control" id="studentSeries" required>
+                <option value="">Selecione a série...</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="form-label">TURMA *</label>
+              <select class="form-control" id="studentClass" required disabled>
+                <option value="">Selecione primeiro a série...</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="student-form-actions">
+            <button class="primary-btn student-save-btn" type="submit">
+              ♙ &nbsp; Salvar aluno
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ALUNOS CADASTRADOS -->
+      <section class="card students-card">
+        <div class="section-top">
+          <div>
+            <h2>♙ Alunos Cadastrados</h2>
+            <p id="studentCount"></p>
+          </div>
+
+          <div class="search-row">
+            <input
+              class="search"
+              id="studentSearch"
+              type="text"
+              placeholder="⌕  Buscar aluno por nome...">
+
+            <select class="select-small" id="seriesFilter">
+              <option value="">Todas as séries</option>
+            </select>
+
+            <select class="select-small" id="classFilter">
+              <option value="">Todas as turmas</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>NOME DO ALUNO</th>
+                <th>SÉRIE</th>
+                <th>TURMA</th>
+                <th>TURNO</th>
+                <th>SITUAÇÃO</th>
+                <th>AÇÕES</th>
+              </tr>
+            </thead>
+
+            <tbody id="studentTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL - GERENCIAR SÉRIES E TURMAS -->
+  <div id="classManagerModal" class="class-manager-modal">
+    <div class="class-manager-content">
+
+      <div class="class-manager-header">
+        <div>
+          <h2>Gerenciar Séries e Turmas</h2>
+          <p>Cadastre as séries e turmas disponíveis.</p>
+        </div>
+
+        <button
+          type="button"
+          id="closeClassManager"
+          class="class-manager-close">
+          ×
+        </button>
+      </div>
+
+      <!-- CADASTRAR SÉRIE -->
+      <div class="series-manager">
+        <h3>Nova Série</h3>
+
+        <div class="new-series-row">
+          <div class="new-series-field">
+            <label class="form-label">NOME DA SÉRIE</label>
+            <input
+              type="text"
+              class="form-control"
+              id="newSeriesName"
+              placeholder="Ex: 8º ano">
+          </div>
+
+          <button
+            type="button"
+            class="primary-btn"
+            id="saveSeries">
+            + Adicionar série
+          </button>
+        </div>
+
+        <div id="seriesList" class="series-list"></div>
+      </div>
+
+      <!-- CADASTRAR TURMA -->
+      <div class="class-manager-section">
+        <h3>Nova Turma</h3>
+
+        <div class="new-class-grid">
+          <div>
+            <label class="form-label">SÉRIE</label>
+            <select class="form-control" id="newClassSeries">
+              <option value="">Selecione...</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="form-label">NOME DA TURMA</label>
+            <input
+              type="text"
+              class="form-control"
+              id="newClassName"
+              placeholder="Ex: 8º 1">
+          </div>
+
+          <div>
+            <label class="form-label">TURNO</label>
+            <select class="form-control" id="newClassShift">
+              <option value="">Selecione...</option>
+              <option value="Matutino">Matutino</option>
+              <option value="Vespertino">Vespertino</option>
+              <option value="Noturno">Noturno</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="class-save-row">
+          <button
+            type="button"
+            class="primary-btn"
+            id="saveClass">
+            + Adicionar turma
+          </button>
+        </div>
+
+        <!-- TURMAS CADASTRADAS -->
+        <div class="registered-classes">
+          <h3>Turmas cadastradas</h3>
+
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>TURMA</th>
+                  <th>SÉRIE</th>
+                  <th>TURNO</th>
+                </tr>
+              </thead>
+
+              <tbody id="classList">
+                <tr>
+                  <td colspan="3">
+                    <div class="empty">Nenhuma turma cadastrada.</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MENSAGENS -->
+  <div id="toast" class="toast"></div>
+
+  <script src="system.js"></script>
+</body>
+
+</html>

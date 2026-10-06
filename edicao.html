@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechEdu — Edição de Dados</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- TOPO -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand app-brand" href="chamada.html">
+          <div class="brand-logo"><i></i><i></i><i></i><i></i></div>
+          <div>
+            <strong>TechEdu</strong>
+            <small>🎓 Curso de Informática</small>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a class="nav-link" href="chamada.html">
+            ✓ <span>Chamada do<br>Dia</span>
+          </a>
+
+          <a class="nav-link" href="alunos.html">
+            ♙ <span>Cadastro de<br>Alunos</span>
+          </a>
+
+          <a class="nav-link" href="relatorios.html">
+            ⌕ <span>Consulta &<br>Relatórios</span>
+          </a>
+
+          <a class="nav-link active" href="edicao.html">
+            ✎ <span>Edição de<br>Dados</span>
+          </a>
+        </nav>
+
+        <div class="user-area">
+          <div class="avatar">AP</div>
+          <div>
+            <b>Área dos Professores</b>
+            <small>Instrutor de Informática</small>
+          </div>
+          <button class="logout" id="logout">↪ Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO -->
+    <main class="container">
+
+      <section class="heading">
+        <div class="eyebrow">✎ &nbsp; MANUTENÇÃO CADASTRAL</div>
+        <h1>Edição de Dados</h1>
+        <p>Atualize dados cadastrais de alunos ou corrija registros de presença retroativos.</p>
+      </section>
+
+      <!-- ABAS -->
+      <div class="tabs no-print">
+        <button class="active" id="tabStudents">♙ &nbsp; Editar Aluno</button>
+        <button id="tabRecords">▣ &nbsp; Editar Registro de Presença</button>
+      </div>
+
+      <!-- EDIÇÃO DO ALUNO -->
+      <section id="editStudentSection" class="card edit-card">
+        <div class="edit-title">
+          <div>
+            <h2>Editar dados do aluno</h2>
+            <small>Selecione um aluno para atualizar suas informações.</small>
+          </div>
+
+          <button type="button" class="danger-top" id="deleteStudent">
+            ▣ &nbsp; Excluir Aluno
+          </button>
+        </div>
+
+        <!-- BUSCAR ALUNO -->
+        <div class="record-select student-search-field">
+          <label class="form-label">BUSCAR ALUNO PARA EDITAR</label>
+
+          <div class="student-search">
+            <input
+              type="text"
+              class="form-control"
+              id="editStudentSearch"
+              placeholder="Digite o nome do aluno..."
+              autocomplete="off">
+
+            <div id="editStudentResults" class="student-search-results"></div>
+          </div>
+
+          <input type="hidden" id="editStudentSelect">
+        </div>
+
+        <!-- FORMULÁRIO -->
+        <form id="editStudentForm">
+          <div class="form-grid">
+
+            <div>
+              <label class="form-label">NOME COMPLETO DO ALUNO *</label>
+              <input class="form-control" id="editName" type="text" required>
+            </div>
+
+            <div>
+              <label class="form-label">SÉRIE *</label>
+              <select class="form-control" id="editSeries" required>
+                <option value="">Selecione a série...</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="form-label">TURMA *</label>
+              <select class="form-control" id="editClass" required disabled>
+                <option value="">Selecione primeiro a série...</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="form-label">TURNO</label>
+              <input
+                class="form-control"
+                id="editShift"
+                type="text"
+                placeholder="Definido pela turma"
+                disabled>
+            </div>
+
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="outline-btn" id="cancelStudent">
+              Cancelar
+            </button>
+
+            <button type="submit" class="primary-btn edit-save-btn">
+              ▣ &nbsp; Salvar alterações
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- EDIÇÃO DE PRESENÇA -->
+      <section id="editRecordSection" class="card edit-card hidden-section">
+        <div class="edit-title">
+          <div>
+            <h2>Editar registro de presença</h2>
+            <small>Altere a data, tema ou status de um registro existente.</small>
+          </div>
+
+          <button type="button" class="danger-top" id="deleteRecord">
+            ▣ &nbsp; Excluir Registro
+          </button>
+        </div>
+
+        <!-- BUSCAR ALUNO -->
+        <div class="record-select student-search-field">
+          <label class="form-label">BUSCAR ALUNO</label>
+
+          <div class="student-search">
+            <input
+              type="text"
+              class="form-control"
+              id="recordStudentSearch"
+              placeholder="Digite o nome do aluno..."
+              autocomplete="off">
+
+            <div id="recordStudentResults" class="student-search-results"></div>
+          </div>
+
+          <input type="hidden" id="recordStudentId">
+        </div>
+
+        <!-- REGISTRO DE PRESENÇA -->
+        <div class="record-select">
+          <label class="form-label">REGISTRO DE PRESENÇA</label>
+
+          <select class="form-control" id="recordSelect" disabled>
+            <option value="">Selecione primeiro um aluno...</option>
+          </select>
+        </div>
+
+        <div class="form-grid-wide">
+          <div>
+            <label class="form-label">ALUNO VINCULADO</label>
+            <input class="form-control" id="recordStudent" disabled>
+          </div>
+
+          <div>
+            <label class="form-label">DATA DA AULA *</label>
+            <input class="form-control" id="recordDate" type="date">
+          </div>
+        </div>
+
+        <div class="record-field">
+          <label class="form-label">TEMA DA AULA *</label>
+          <select class="form-control" id="recordTheme"></select>
+        </div>
+
+        <div class="record-field">
+          <label class="form-label">STATUS DE PRESENÇA *</label>
+
+          <div class="record-status">
+            <button type="button" class="status-choice" id="recordPresent">
+              ✓ &nbsp; Presente
+            </button>
+
+            <button type="button" class="status-choice" id="recordAbsent">
+              ⊗ &nbsp; Ausente
+            </button>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="outline-btn" id="cancelRecord">
+            Cancelar
+          </button>
+
+          <button type="button" class="primary-btn edit-save-btn" id="saveRecord">
+            ▣ &nbsp; Salvar alterações
+          </button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="system.js"></script>
+</body>
+
+</html>

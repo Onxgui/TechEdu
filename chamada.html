@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechEdu — Chamada do Dia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- TOPO -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand app-brand" href="chamada.html">
+          <div class="brand-logo"><i></i><i></i><i></i><i></i></div>
+          <div>
+            <strong>TechEdu</strong>
+            <small>Curso de Informática</small>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a class="nav-link active" href="chamada.html">
+            ✓ <span>Chamada do<br>Dia</span>
+          </a>
+
+          <a class="nav-link" href="alunos.html">
+            ♙ <span>Cadastro de<br>Alunos</span>
+          </a>
+
+          <a class="nav-link" href="relatorios.html">
+            ⌕ <span>Consulta &<br>Relatórios</span>
+          </a>
+
+          <a class="nav-link" href="edicao.html">
+            ✎ <span>Edição de<br>Dados</span>
+          </a>
+        </nav>
+
+        <div class="user-area">
+          <div class="avatar">AP</div>
+
+          <div>
+            <b>Área dos Professores</b>
+            <small>Instrutor de Informática</small>
+          </div>
+
+          <button class="logout" id="logout">↪ Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO -->
+    <main class="container">
+
+      <section class="heading">
+        <div class="eyebrow">▣ &nbsp; CONTROLE DE FREQUÊNCIA EM SALA</div>
+        <h1>Lista de Presença (Chamada do Dia)</h1>
+        <p>Selecione a data, o tema da aula e marque os alunos presentes ou ausentes com um clique.</p>
+      </section>
+
+      <!-- FILTROS DA CHAMADA -->
+      <section class="card filters grid-3">
+        <div class="field">
+          <label>▣ &nbsp; DATA DA AULA</label>
+          <input type="date" id="callDate">
+        </div>
+
+        <div class="field">
+          <label>▣ &nbsp; TEMA DA AULA (MÓDULO)</label>
+          <select id="callTheme"></select>
+        </div>
+
+        <div class="field">
+          <label>◷ &nbsp; TURMA / TURNO</label>
+          <select id="callClass"></select>
+        </div>
+      </section>
+
+      <!-- RESUMO DA CHAMADA -->
+      <section class="card summary">
+        <div class="summary-left">
+          <div class="stat total">
+            <small>Total</small>
+            <b id="sTotal"></b>
+          </div>
+
+          <div class="stat present">
+            <small>Presentes</small>
+            <b id="sPresent"></b>
+          </div>
+
+          <div class="stat absent">
+            <small>Ausentes</small>
+            <b id="sAbsent"></b>
+          </div>
+
+          <div class="frequency">
+            Frequência: <b id="sFreq"></b>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="outline-btn green-outline" id="allPresent">
+            ✓ &nbsp; Todos Presentes
+          </button>
+
+          <button class="outline-btn red-outline" id="allAbsent">
+            × &nbsp; Todos Ausentes
+          </button>
+        </div>
+      </section>
+
+      <!-- LISTA DE ALUNOS -->
+      <section class="card">
+        <div class="table-head">
+          <span>ALUNO</span>
+          <span>STATUS DE PRESENÇA (TOQUE PARA ALTERNAR)</span>
+        </div>
+
+        <div id="studentList"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="system.js"></script>
+</body>
+
+</html>

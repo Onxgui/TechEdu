@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechEdu — Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-body">
+  <main class="login-page">
+    <section class="login-card">
+      <div class="brand login-brand">
+        <div class="brand-logo"><i></i><i></i><i></i><i></i></div>
+        <div><strong>TechEdu <span>—</span></strong><b>Curso de Informática</b></div>
+      </div>
+      <form id="loginForm">
+        <div class="input-wrap"><input id="email" type="email" placeholder="E-mail" required></div>
+        <div class="input-wrap password-wrap">
+          <input id="password" type="password" placeholder="Senha" required>
+          <button type="button" id="togglePassword">◉</button>
+        </div>
+        <p id="loginMessage"></p>
+        <button class="primary-btn full">Entrar</button>
+      </form>
+      <button class="forgot" id="forgotPassword">Esqueci minha senha</button>
+    </section>
+  </main>
+  <footer>© <span id="year"></span> TechEdu. Todos os direitos reservados.</footer>
+  <script src="app.js"></script>
+</body>
+
+</html>
